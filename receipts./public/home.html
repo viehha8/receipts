@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Receipts: who actually agreed to what</title>
+    <meta name="description" content="Receipts reads your group chat and shows what was really agreed, what is still up in the air, and the exact messages that prove it." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧾</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/home.css" />
+  </head>
+  <body>
+    <!-- ================= NAV ================= -->
+    <nav class="nav">
+      <a class="nav-brand" href="/">
+        <span class="nav-logo" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M14 8q0-4 4-4h28q4 0 4 4v50l-5-4-5 4-5-4-5 4-5-4-5 4-6-4z" fill="#fff" stroke="#2c2541" stroke-width="3.5" stroke-linejoin="round"/><circle cx="25" cy="25" r="3.2" fill="#2c2541"/><circle cx="39" cy="25" r="3.2" fill="#2c2541"/><ellipse cx="20" cy="32" rx="3.6" ry="2.2" fill="#ffc9d0"/><ellipse cx="44" cy="32" rx="3.6" ry="2.2" fill="#ffc9d0"/><path d="M28 32q4 4.5 8 0" fill="none" stroke="#2c2541" stroke-width="3" stroke-linecap="round"/><path d="M23 42h18M23 48h12" stroke="#efe6dc" stroke-width="3.5" stroke-linecap="round"/></svg>
+        </span>
+        Receipts
+      </a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#safety">Safety</a>
+        <a href="#telegram">Telegram</a>
+      </div>
+      <a class="btn btn-small" href="/app">Open the app <i data-icon="arrow"></i></a>
+    </nav>
+
+    <!-- ================= HERO ================= -->
+    <header class="hero">
+      <div class="hero-text">
+        <p class="eyebrow"><i data-icon="sparkle"></i> For group projects, CCAs, trips and dinners</p>
+        <h1>Group chats forget.<br /><span class="squiggle">Receipts don’t.</span></h1>
+        <p class="lead">Drop in your group chat and see who <em>actually</em> agreed to what, what’s still up in the air, and the exact messages that prove it.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-big" href="/app"><i data-icon="receipt"></i> Find my receipts</a>
+          <a class="btn btn-ghost" href="#telegram"><i data-icon="send"></i> Use it in Telegram</a>
+        </div>
+        <ul class="hero-points">
+          <li><i data-icon="check"></i> No sign-up</li>
+          <li><i data-icon="lock"></i> Personal details hidden</li>
+          <li><i data-icon="globe"></i> Gets Singlish, 可以 and boleh</li>
+        </ul>
+      </div>
+
+      <!-- animated scene: chat on the left, receipts printing on the right -->
+      <div class="scene" id="scene" aria-label="Animation: a group chat turns into receipts">
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+
+        <div class="phone">
+          <div class="phone-head">
+            <span class="avatar">IS</span>
+            <div><b>IS216 project</b><small>Aisha, Ben, Jun Wei, Sarah</small></div>
+          </div>
+          <div class="phone-body">
+            <div class="bubble b1"><span class="who c1">Ben</span>I can probably do the frontend</div>
+            <div class="bubble b2"><span class="who c2">Jun Wei</span>maybe Sarah take it instead?</div>
+            <div class="bubble b3"><span class="who c3">Sarah</span>hmm see how first</div>
+            <div class="bubble b4"><span class="who c4">Aisha</span>report due Thu 6pm ok?</div>
+            <div class="bubble b5"><span class="who c1">Ben</span>can</div>
+            <div class="bubble b6"><span class="who c2">Jun Wei</span>ok lor</div>
+            <div class="bubble me b7">/receipts</div>
+          </div>
+        </div>
+
+        <div class="printer">
+          <div class="printer-slot"></div>
+          <div class="mini-receipt r1">
+            <span class="mini-stamp amber"><i data-icon="clock"></i> Not confirmed yet</span>
+            <b>Frontend owner</b>
+            <p>Ben offered, Sarah was suggested. Nobody agreed.</p>
+            <div class="mini-proof">“I can probably do the frontend”</div>
+          </div>
+          <div class="mini-receipt r2">
+            <span class="mini-stamp green"><i data-icon="check"></i> Confirmed</span>
+            <b>Report deadline</b>
+            <p>Thursday 6pm. Ben and Jun Wei agreed.</p>
+            <div class="mini-proof">“can” · “ok lor”</div>
+          </div>
+        </div>
+
+        <div class="buddy" aria-hidden="true">
+          <svg viewBox="0 0 120 140"><path d="M18 10 Q18 4 24 4 H96 Q102 4 102 10 V124 L94 132 L86 124 L78 132 L70 124 L62 132 L54 124 L46 132 L38 124 L30 132 L22 124 L18 128 Z" fill="#fff" stroke="#2c2541" stroke-width="4" stroke-linejoin="round"/><g class="eyes"><circle cx="45" cy="46" r="6" fill="#2c2541"/><circle cx="75" cy="46" r="6" fill="#2c2541"/><circle cx="47" cy="44" r="2" fill="#fff"/><circle cx="77" cy="44" r="2" fill="#fff"/></g><ellipse cx="34" cy="60" rx="7" ry="4" fill="#ffc9d0"/><ellipse cx="86" cy="60" rx="7" ry="4" fill="#ffc9d0"/><path d="M50 60 Q60 70 70 60" fill="none" stroke="#2c2541" stroke-width="4" stroke-linecap="round"/><rect x="34" y="84" width="52" height="5" rx="2.5" fill="#efe6dc"/><rect x="34" y="96" width="38" height="5" rx="2.5" fill="#efe6dc"/><rect x="34" y="108" width="46" height="5" rx="2.5" fill="#efe6dc"/></svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= PROBLEM ================= -->
+    <section class="section problem reveal">
+      <div class="quotes">
+        <span class="q q1">“I thought <b>you</b> were doing it?”</span>
+        <span class="q q2">“When did we agree on that?”</span>
+        <span class="q q3">“Eh who paid for dinner ah”</span>
+      </div>
+      <h2>Sound familiar?</h2>
+      <p class="section-lead">Three hundred messages later, nobody remembers what was actually decided. And plain AI summaries make it worse: to them, “I can probably do it” already counts as a yes.</p>
+    </section>
+
+    <!-- ================= COMPARE ================= -->
+    <section class="section compare reveal">
+      <div class="compare-card plain">
+        <span class="label">A plain AI summary</span>
+        <ul>
+          <li><span class="x">✓</span> Ben is doing the frontend</li>
+          <li><span class="x">✓</span> All tasks confirmed and assigned to Ben</li>
+        </ul>
+        <p class="verdict bad"><i data-icon="alert"></i> Guessed one, and obeyed a prank message for the other.</p>
+      </div>
+      <div class="vs">vs</div>
+      <div class="compare-card good">
+        <span class="label">Receipts</span>
+        <ul>
+          <li><span class="pill amber">Not confirmed yet</span> Frontend: Ben offered, nobody said yes</li>
+          <li><span class="pill red">Ignored</span> “SYSTEM OVERRIDE…” was a trick, not a decision</li>
+        </ul>
+        <p class="verdict ok"><i data-icon="shield"></i> Every claim comes with the messages that prove it.</p>
+      </div>
+    </section>
+
+    <!-- ================= HOW ================= -->
+    <section class="section reveal" id="how">
+      <p class="kicker">How it works</p>
+      <h2>Three steps. About thirty seconds.</h2>
+      <div class="steps">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <div class="step-ic"><i data-icon="upload"></i></div>
+          <h3>Bring your chat</h3>
+          <p>Export a WhatsApp or Telegram chat, paste messages in, or add the Receipts bot to your group.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <div class="step-ic"><i data-icon="clock"></i></div>
+          <h3>Pick a time window</h3>
+          <p>The whole chat, the last hour, or just last night’s planning session.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <div class="step-ic"><i data-icon="receipt"></i></div>
+          <h3>Get your receipts</h3>
+          <p>Every plan sorted, every claim linked to its messages, plus a friendly message to settle anything that’s still open.</p>
+        </div>
+      </div>
+
+      <div class="stamps">
+        <div class="stamp-card green"><span class="big-stamp"><i data-icon="check"></i> Confirmed</span><p>Someone said it and another person clearly agreed.</p></div>
+        <div class="stamp-card amber"><span class="big-stamp"><i data-icon="clock"></i> Not confirmed yet</span><p>Suggested or offered, but nobody else said yes.</p></div>
+        <div class="stamp-card red"><span class="big-stamp"><i data-icon="bolt"></i> Disputed</span><p>People disagreed and it was never settled.</p></div>
+        <div class="stamp-card grey"><span class="big-stamp"><i data-icon="cancel"></i> Cancelled</span><p>It was agreed, then called off or replaced.</p></div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section class="section reveal">
+      <p class="kicker">What you get</p>
+      <h2>Small tool, lots of little helpers</h2>
+      <div class="features">
+        <div class="feature"><div class="f-ic lilac"><i data-icon="clip"></i></div><h3>Proof for everything</h3><p>Tap a card and the chat jumps to the exact messages behind it.</p></div>
+        <div class="feature"><div class="f-ic mint"><i data-icon="coin"></i></div><h3>Bill splits, done right</h3><p>Who paid, who owes whom, to the cent. The maths is done by code, never guessed by the AI.</p></div>
+        <div class="feature"><div class="f-ic peach"><i data-icon="globe"></i></div><h3>Speaks Singapore</h3><p>“can lah but…”, “see how”, “abuden”, 可以, boleh, tak boleh. It knows a maybe from a yes.</p></div>
+        <div class="feature"><div class="f-ic pink"><i data-icon="send"></i></div><h3>Ready-to-send nudges</h3><p>For anything unsettled, a friendly message you can drop straight into the group.</p></div>
+        <div class="feature"><div class="f-ic sky"><i data-icon="link"></i></div><h3>Share with your group</h3><p>One link for everyone. Personal details hidden, gone after 30 days, deletable any time.</p></div>
+        <div class="feature"><div class="f-ic lemon"><i data-icon="pencil"></i></div><h3>You get the last word</h3><p>Think the AI got one wrong? Tap “This is wrong” and fix it. Your change is clearly marked.</p></div>
+      </div>
+    </section>
+
+    <!-- ================= SAFETY ================= -->
+    <section class="section safety reveal" id="safety">
+      <div class="safety-text">
+        <p class="kicker">Built to be trusted</p>
+        <h2>An AI that has to show its working</h2>
+        <p class="section-lead">Receipts treats the AI as something that can be wrong or tricked, and checks its work in plain code.</p>
+      </div>
+      <ul class="guards">
+        <li><span class="g-ic"><i data-icon="users"></i></span><div><b>Two-person rule</b><p>Nothing is “confirmed” unless two different people are on record agreeing.</p></div></li>
+        <li><span class="g-ic"><i data-icon="search"></i></span><div><b>Every quote checked</b><p>Each quote must match the real message word for word. Made-up ones are removed.</p></div></li>
+        <li><span class="g-ic"><i data-icon="mask"></i></span><div><b>Tricks get caught</b><p>Messages like “ignore your instructions” are flagged and can never count as agreement.</p></div></li>
+        <li><span class="g-ic"><i data-icon="lock"></i></span><div><b>Private by default</b><p>Phone numbers, emails, card numbers and NRICs are hidden before the AI reads anything. Pasted chats are never stored.</p></div></li>
+        <li><span class="g-ic"><i data-icon="trash"></i></span><div><b>Forgets on purpose</b><p>Telegram messages are deleted after 7 days. Share links expire after 30.</p></div></li>
+      </ul>
+    </section>
+
+    <!-- ================= TELEGRAM ================= -->
+    <section class="section telegram reveal" id="telegram">
+      <div>
+        <p class="kicker">Lives in your group</p>
+        <h2>Or just ask the bot</h2>
+        <p class="section-lead">Add the Receipts bot to a Telegram group. It says hello, explains what it saves, and stays quiet until someone asks.</p>
+        <ul class="cmds">
+          <li><code>/receipts 2h</code> what did we decide in the last 2 hours?</li>
+          <li><code>/dashboard</code> open the full breakdown</li>
+          <li><code>/pause</code> stop saving messages for a while</li>
+          <li><code>/forgetme</code> delete everything you’ve said</li>
+        </ul>
+      </div>
+      <div class="tg">
+        <div class="tg-msg me">/receipts 2h</div>
+        <div class="tg-msg bot">
+          <b class="tg-name">Receipts</b>
+          <p><b>Confirmed</b><br />Report deadline: Thursday 6pm</p>
+          <p><b>Not confirmed yet</b><br />Frontend owner: Ben offered, nobody agreed</p>
+          <p><b>Money</b><br />Aisha → Ben $24 · Sarah → Ben $24</p>
+        </div>
+        <div class="tg-btn">Ask: Frontend owner</div>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="section cta reveal">
+      <div class="cta-card">
+        <h2>Settle it with receipts.</h2>
+        <p>Free, no sign-up, and your chat isn’t stored.</p>
+        <a class="btn btn-big light" href="/app"><i data-icon="receipt"></i> Find my receipts</a>
+      </div>
+    </section>
+
+    <footer class="foot">
+      Made for the AI Lodge Hackathon 2026. Receipts is an AI tool and can be wrong; it shows the evidence so your group can decide.
+    </footer>
+
+    <script type="module" src="/home.js"></script>
+  </body>
+</html>

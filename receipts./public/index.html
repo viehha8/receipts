@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Receipts: who actually agreed to what</title>
+    <meta name="description" content="Receipts reads your group chat and shows what was really agreed, what is still unconfirmed, and the exact messages that prove it." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧾</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="brand" href="/" title="Back to home">
+        <div class="logo" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M14 8q0-4 4-4h28q4 0 4 4v50l-5-4-5 4-5-4-5 4-5-4-5 4-6-4z" fill="#fff" stroke="#2c2541" stroke-width="3.5" stroke-linejoin="round"/><circle cx="25" cy="25" r="3.2" fill="#2c2541"/><circle cx="39" cy="25" r="3.2" fill="#2c2541"/><ellipse cx="20" cy="32" rx="3.6" ry="2.2" fill="#ffc9d0"/><ellipse cx="44" cy="32" rx="3.6" ry="2.2" fill="#ffc9d0"/><path d="M28 32q4 4.5 8 0" fill="none" stroke="#2c2541" stroke-width="3" stroke-linecap="round"/><path d="M23 42h18M23 48h12" stroke="#efe6dc" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+        <div>
+          <h1>Receipts</h1>
+          <p>Who actually agreed to what, with the messages to prove it.</p>
+        </div>
+      </a>
+      <div class="status" id="health"><span class="dot"></span>Checking…</div>
+    </header>
+
+    <main class="wrap">
+      <section class="shared-banner hidden" id="sharedBanner" aria-label="Shared receipts">
+        <div class="lock-icon" aria-hidden="true"><i data-icon="clip"></i></div>
+        <div>
+          <h2 id="sharedTitle">Shared receipts</h2>
+          <p class="hint" id="sharedMeta">Loading…</p>
+        </div>
+        <a class="btn primary" href="/app">Make your own</a>
+      </section>
+
+      <section class="lock hidden" id="lock" aria-label="Access code">
+        <div class="lock-icon" aria-hidden="true"><i data-icon="lock"></i></div>
+        <div class="lock-text">
+          <h2>Enter the access code</h2>
+          <p class="hint">This demo is protected so nobody uses up the AI credit. Judges: the code is in the Devpost write-up.</p>
+        </div>
+        <form class="lock-form" id="lockForm">
+          <input type="password" id="lockInput" placeholder="Access code" autocomplete="off" required />
+          <button class="btn primary" type="submit">Unlock</button>
+        </form>
+        <p class="error hidden" id="lockError" role="alert"></p>
+      </section>
+
+      <!-- ================= SETUP: three clear steps ================= -->
+      <section class="setup" aria-label="Set up">
+        <!-- STEP 1 -->
+        <div class="step" id="step1">
+          <div class="step-head">
+            <span class="num">1</span>
+            <div>
+              <h2>Load a chat</h2>
+              <p class="hint">Upload an exported chat, or paste messages in.</p>
+            </div>
+          </div>
+
+          <div class="tabs" role="tablist">
+            <button class="tab active" data-tab="upload" role="tab"><i data-icon="upload"></i> Upload</button>
+            <button class="tab" data-tab="paste" role="tab"><i data-icon="clipboard"></i> Paste</button>
+            <button class="tab hidden" data-tab="group" role="tab" id="groupTab"><i data-icon="users"></i> Group</button>
+          </div>
+
+          <div class="pane hidden" data-pane="paste">
+            <p class="hint">One message per line, written as <code>Name: message</code>.</p>
+            <textarea id="pasteBox" spellcheck="false" placeholder="Ben: I can probably do the frontend&#10;Sarah: hmm see how first&#10;Aisha: report due Thursday 6pm ok?&#10;Ben: can"></textarea>
+            <button class="btn" id="loadPaste">Load these messages</button>
+          </div>
+
+          <div class="pane" data-pane="upload">
+            <label class="drop" id="drop">
+              <input type="file" id="fileInput" accept=".txt,.json,text/plain,application/json" />
+              <span class="drop-icon" aria-hidden="true"><i data-icon="upload"></i></span>
+              <strong>Drop your chat file here</strong>
+              <span>or click to choose one</span>
+            </label>
+            <details class="howto">
+              <summary>How do I get my chat file?</summary>
+              <div class="howto-body">
+                <p><b>WhatsApp</b>: open the group, tap its name, then <b>Export chat</b> and choose <b>Without media</b>. Upload the <code>.txt</code> file.</p>
+                <p><b>Telegram</b>: on Telegram Desktop, open the group, then <b>⋮ → Export chat history</b>. Untick photos and files, set the format to <b>JSON</b>, and upload <code>result.json</code>.</p>
+              </div>
+            </details>
+          </div>
+
+          <div class="pane hidden" data-pane="group">
+            <p id="groupInfo" class="hint"></p>
+            <button class="btn" id="reloadGroup">Refresh messages</button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step" id="step2">
+          <div class="step-head">
+            <span class="num">2</span>
+            <div>
+              <h2>Pick a time window</h2>
+              <p class="hint">Only messages in this window get checked.</p>
+            </div>
+          </div>
+          <div class="chips" id="rangeChips">
+            <button data-range="all" class="chip active">Whole chat</button>
+            <button data-range="1h" class="chip">Last hour</button>
+            <button data-range="24h" class="chip">Last day</button>
+            <button data-range="7d" class="chip">Last week</button>
+          </div>
+          <details class="custom">
+            <summary>Custom range</summary>
+            <div class="range-fields">
+              <label>From <input type="datetime-local" id="fromInput" /></label>
+              <label>To <input type="datetime-local" id="toInput" /></label>
+            </div>
+            <p class="hint">Tip: hover a message in the chat and tap <b>start here</b> or <b>end here</b>.</p>
+          </details>
+          <p class="count" id="rangeInfo">No chat loaded yet.</p>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step" id="step3">
+          <div class="step-head">
+            <span class="num">3</span>
+            <div>
+              <h2>Get your receipts</h2>
+              <p class="hint">Takes about 10 to 30 seconds.</p>
+            </div>
+          </div>
+          <button class="btn primary" id="analyzeBtn" disabled><i data-icon="receipt"></i> Find the receipts</button>
+          <label class="switch">
+            <input type="checkbox" id="compareNaive" checked />
+            <span class="track" aria-hidden="true"></span>
+            <span>Also show what a plain AI summary says</span>
+          </label>
+          <p class="error hidden" id="errorBox" role="alert"></p>
+          <p class="privacy"><i data-icon="lock"></i> Phone numbers, emails, card numbers and NRICs are hidden before the AI reads anything.</p>
+        </div>
+      </section>
+
+      <!-- ================= RESULTS + CHAT ================= -->
+      <section class="board">
+        <div class="results" id="results" aria-live="polite"></div>
+
+        <aside class="chat">
+          <div class="chat-head">
+            <h2><i data-icon="chat"></i> The chat</h2>
+            <span class="hint" id="timelineCount"></span>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Receipts is an AI tool and can be wrong. It never decides who's right; it shows the evidence so your group can. Pasted chats are not stored.
+    </footer>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

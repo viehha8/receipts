@@ -1,0 +1,21 @@
+{
+  "name": "receipts",
+  "version": "1.0.0",
+  "description": "Receipts: finds out who actually agreed to what in a group chat, with the messages to prove it.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test",
+    "eval": "node eval/run.js"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "grammy": "^1.30.0"
+  }
+}
